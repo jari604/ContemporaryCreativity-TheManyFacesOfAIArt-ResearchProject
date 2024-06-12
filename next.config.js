@@ -7,6 +7,16 @@ const nextConfig = {
   compiler: {
     removeConsole: false,
   },
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'storage.googleapis.com',
+        port: '',
+        pathname: '/research-project-creative-ai/**',
+      },
+    ],
+  },
 };
 
 module.exports = nextConfig;

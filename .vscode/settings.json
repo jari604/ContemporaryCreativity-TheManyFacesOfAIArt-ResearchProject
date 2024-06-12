@@ -21,5 +21,13 @@
   "jest.showTerminalOnLaunch": false, // Don't automatically open test explorer terminal on launch
   "typescript.enablePromptUseWorkspaceTsdk": true,
   "eslint.nodePath": ".yarn/sdks",
-  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs"
+  "eslint.workingDirectories": [
+    {
+      "mode": "auto"
+    }
+  ],
+  "prettier.prettierPath": ".yarn/sdks/prettier/index.cjs",
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
