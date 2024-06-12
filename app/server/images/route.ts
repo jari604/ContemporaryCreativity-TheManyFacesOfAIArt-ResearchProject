@@ -38,7 +38,7 @@ export async function GET(request: Request) {
   console.log(imagesData);
 
   return NextResponse.json({
-    image_1: possibleImages[0],
-    image_2: possibleImages[1],
+    image_1: possibleImages[2],
+    image_2: possibleImages[5],
   });
 }
