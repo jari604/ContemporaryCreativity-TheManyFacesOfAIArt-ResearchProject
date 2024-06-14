@@ -4,12 +4,12 @@ import Footer from '@components/ui/footer';
 import GlobalNav from '@components/ui/global-nav';
 import { ThemeModeScript } from 'flowbite-react';
 import type { Metadata } from 'next';
-import { Raleway } from 'next/font/google';
+import { Roboto_Slab } from 'next/font/google';
 import React from 'react';
 
 import { Providers } from './provider';
 
-const raleway = Raleway({ subsets: ['latin'] });
+const robotoSlab = Roboto_Slab({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title: 'Contemporary Creativity: The Many Faces of AI Art',
@@ -22,7 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         <ThemeModeScript />
       </head>
-      <body className={raleway.className}>
+      <body className={robotoSlab.className}>
         <Providers>
           <GlobalNav />
           {children}
