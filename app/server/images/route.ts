@@ -25,7 +25,7 @@ const possibleImages: string[] = [
   'ox_03079.png',
 ];
 
-export async function GET(request: Request) {
+export async function GET() {
   // Choose 2 random images
   // const index1 = Math.floor(Math.random() * possibleImages.length);
   // let index2 = index1;

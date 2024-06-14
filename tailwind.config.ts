@@ -1,14 +1,20 @@
-// eslint-disable-next-line import/extensions
-const flowbite = require('flowbite-react/tailwind');
+import flowbite from 'flowbite-react/tailwind';
+import path from 'path';
+import type { Config } from 'tailwindcss';
 
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+const flowbiteContent = path.dirname(require.resolve('flowbite-react/tailwind'));
+
+const config: Config = {
   content: [
     './src/**/*.{js,ts,jsx,tsx}',
     './ui/**/*.{js,ts,jsx,tsx}',
     './app/**/*.{js,ts,jsx,tsx}',
-    flowbite.content(),
+    `${flowbiteContent}/**/*.{js,ts,jsx,tsx,cjs}`,
   ],
+  plugins: [flowbite.plugin()],
+  extend: {
+    display: ['group-hover'],
+  },
   theme: {
     extend: {
       boxShadow: {
@@ -20,8 +26,6 @@ module.exports = {
       },
     },
   },
-  plugins: [flowbite.plugin()],
-  extend: {
-    display: ['group-hover'],
-  },
 };
+
+export default config;
