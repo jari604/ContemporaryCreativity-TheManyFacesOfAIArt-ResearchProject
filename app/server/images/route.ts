@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 
-import { getImagesData } from './action';
+const numberOfImages: number = Number(process.env.NUMBER_OF_IMAGES);
 
 const possibleImages: string[] = [
   'ox_00486.png',
@@ -27,18 +27,14 @@ const possibleImages: string[] = [
 
 export async function GET() {
   // Choose 2 random images
-  // const index1 = Math.floor(Math.random() * possibleImages.length);
-  // let index2 = index1;
-  // while (index2 == index1) {
-  //   index2 = Math.floor(Math.random() * possibleImages.length);
-  // }
-
-  const imagesData = await getImagesData();
-
-  console.log(imagesData);
+  const index1 = Math.floor(Math.random() * numberOfImages);
+  let index2 = index1;
+  while (index2 === index1) {
+    index2 = Math.floor(Math.random() * numberOfImages);
+  }
 
   return NextResponse.json({
-    image_1: possibleImages[2],
-    image_2: possibleImages[5],
+    image_1: possibleImages[index1],
+    image_2: possibleImages[index2],
   });
 }

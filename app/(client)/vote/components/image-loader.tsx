@@ -1,15 +1,15 @@
 import Image from 'next/image';
-import React from 'react';
 
 export default function ImageLoader(props: { file: string }) {
   const filename: string = encodeURIComponent(props.file);
+
   return (
     <Image
-      src={`https://storage.googleapis.com/research-project-creative-ai/${filename}`}
-      width={500}
-      height={500}
+      src={`/images/OOD/${filename}`}
+      width={256}
+      height={256}
       key={filename}
-      className="rounded border border-gray-700 shadow-lg"
+      className="size-full rounded border border-gray-700 shadow-lg md:size-96"
       alt="Picture"
     />
   );

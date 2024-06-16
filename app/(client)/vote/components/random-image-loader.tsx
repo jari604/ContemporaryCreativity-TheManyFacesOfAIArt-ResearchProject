@@ -14,7 +14,7 @@ function getBaseURL() {
 const baseUrl = getBaseURL();
 
 function randomImageQuery() {
-  const imagePairQuery = useSuspenseQuery({
+  return useSuspenseQuery({
     queryKey: ['images'],
     queryFn: async () => {
       const url = `${baseUrl}/server/images`;
@@ -27,14 +27,12 @@ function randomImageQuery() {
       return res;
     },
   });
-
-  return imagePairQuery;
 }
 export default function RandomImageLoader() {
   const { data } = randomImageQuery();
 
   return (
-    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+    <div className="size-full space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0">
       <ImageLoader file={data.image_1} />
       <ImageLoader file={data.image_2} />
     </div>
