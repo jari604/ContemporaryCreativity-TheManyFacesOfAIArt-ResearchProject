@@ -3,32 +3,37 @@
 import { Navbar } from 'flowbite-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import TUDelftLogo from 'public/TU-Delft/logo-descriptor-png/TUDelft_logo_descriptor_rgb.png';
+import { usePathname } from 'next/navigation';
+import TUDelftLogoDescriptor from 'public/TU-Delft/logo-descriptor-png/TUDelft_logo_descriptor_rgb.png';
 
 function GlobalNav() {
+  const pathname = usePathname();
+
   return (
     <Navbar fluid rounded>
-      <Navbar.Brand as={Link} href="/">
-        <Image src={TUDelftLogo} width={200} alt="TU Delft - Delft University of Technology - logo" />
-        <span className="self-center whitespace-nowrap text-xl font-semibold dark:text-white">
-          Contemporary Creativity: The Many Faces of AI Art
-        </span>
+      <Navbar.Brand className="flex flex-row flex-wrap justify-center md:justify-normal" as={Link} href="/">
+        <Image
+          src={TUDelftLogoDescriptor}
+          alt="TU Delft - Delft University of Technology - logo"
+          className="w-52 flex-initial"
+        />
+        <span className="flex-none text-xl font-semibold">Contemporary Creativity</span>
       </Navbar.Brand>
       <Navbar.Toggle />
       <Navbar.Collapse>
-        <Navbar.Link as={Link} href="/" active>
+        <Navbar.Link as={Link} href="/" active={pathname === '/'}>
           Home
         </Navbar.Link>
-        <Navbar.Link as={Link} href="/explanation">
+        <Navbar.Link as={Link} href="/explanation" active={pathname === '/explanation'}>
           Uitleg
         </Navbar.Link>
-        <Navbar.Link as={Link} href="/vote">
+        <Navbar.Link as={Link} href="/vote" active={pathname === '/vote'}>
           Stemmen
         </Navbar.Link>
-        <Navbar.Link as={Link} href="/license">
+        <Navbar.Link as={Link} href="/license" active={pathname === '/license'}>
           Licentie
         </Navbar.Link>
-        <Navbar.Link as={Link} href="/contact">
+        <Navbar.Link as={Link} href="/contact" active={pathname === '/contact'}>
           Contact
         </Navbar.Link>
       </Navbar.Collapse>
