@@ -2,6 +2,7 @@
 
 import { Suspense } from 'react';
 
+import Loading from './components/loading';
 import RandomImageLoader from './components/random-image-loader';
 import VoteForm from './components/vote-form';
 
@@ -39,7 +40,7 @@ export default function MainPage() {
   return (
     <main className="flex min-h-screen w-full flex-col items-center p-8">
       <div className="flex flex-col items-center justify-between">
-        <Suspense fallback={<div>Loading...</div>}>
+        <Suspense fallback={<Loading />}>
           <RandomImageLoader />
         </Suspense>
         <VoteForm />
