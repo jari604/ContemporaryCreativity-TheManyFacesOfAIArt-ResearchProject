@@ -1,16 +1,16 @@
-function Footer() {
+import { Footer, FooterCopyright, FooterLink, FooterLinkGroup } from 'flowbite-react';
+
+export default function Component() {
   return (
-    <footer className="flex w-full justify-center border-t border-solid border-gray-400 py-4">
-      <a
-        className="ml-2 flex items-center gap-x-1 text-black"
-        href="https://github.com/bysxx/next-ts-template-tailwind"
-        target="_blank"
-        rel="noreferrer"
-      >
-        <span>Source Code</span>
-      </a>
-    </footer>
+    <Footer container>
+      <FooterCopyright href="#" by="Flowbite™" year={2022} />
+      <FooterLinkGroup>
+        <FooterLink href="/">Opening statement</FooterLink>
+        <FooterLink href="/explanation">About</FooterLink>
+        <FooterLink href="/vote">Vote</FooterLink>
+        <FooterLink href="/license">Licensing</FooterLink>
+        <FooterLink href="/contact">Contact</FooterLink>
+      </FooterLinkGroup>
+    </Footer>
   );
 }
-
-export default Footer;
