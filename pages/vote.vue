@@ -75,32 +75,32 @@ async function submit() {
 
 <template>
   <main class="flex min-h-screen w-full flex-col items-center p-8">
-    <div class="flex flex-col items-center justify-between">
+    <div class="flex flex-col md:my-28 items-center justify-between">
       <template v-if="pending">
         <LoadingSkeleton />
       </template>
       <template v-else-if="data">
         <div class="size-full space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0">
           <img
-            :src="`${imageUrlPrefix}/${data.image1.class}/${data.image1.url_id}`"
+            :src="`${imageUrlPrefix}/ALL/${data.image1.url_id}`"
             alt="image 1"
             class="size-full rounded border border-gray-700 shadow-lg md:size-96"
           >
 
-          <div class="mt-20 flex flex-col space-y-2">
+          <div class="flex flex-col space-y-2">
             <div class="flex w-96 items-center justify-between gap-10">
               <FwbButton
                 :color="selectedNovelty === data.image1.url_id ? 'red' : 'default'"
                 @click="setSelectedNovelty(data.image1.url_id)"
               >
-                Left
+                Links / Boven
               </FwbButton>
               <p>Vernieuwend</p>
               <FwbButton
                 :color="selectedNovelty === data.image2.url_id ? 'red' : 'default'"
                 @click="setSelectedNovelty(data.image2.url_id)"
               >
-                Right
+                Rechts / Onder
               </FwbButton>
             </div>
 
@@ -109,14 +109,14 @@ async function submit() {
                 :color="selectedSurprise === data.image1.url_id ? 'red' : 'default'"
                 @click="setSelectedSurprise(data.image1.url_id)"
               >
-                Left
+                Links / Boven
               </FwbButton>
               <p>Verassend</p>
               <FwbButton
                 :color="selectedSurprise === data.image2.url_id ? 'red' : 'default'"
                 @click="setSelectedSurprise(data.image2.url_id)"
               >
-                Right
+                Rechts / Onder
               </FwbButton>
             </div>
 
@@ -125,14 +125,14 @@ async function submit() {
                 :color="selectedValue === data.image1.url_id ? 'red' : 'default'"
                 @click="setSelectedValue(data.image1.url_id)"
               >
-                Left
+                Links / Boven
               </FwbButton>
               <p>Waardevol</p>
               <FwbButton
                 :color="selectedValue === data.image2.url_id ? 'red' : 'default'"
                 @click="setSelectedValue(data.image2.url_id)"
               >
-                Right
+                Rechts / Onder
               </FwbButton>
             </div>
 
@@ -147,7 +147,7 @@ async function submit() {
           </div>
 
           <img
-            :src="`${imageUrlPrefix}/${data.image2.class}/${data.image2.url_id}`"
+            :src="`${imageUrlPrefix}/ALL/${data.image2.url_id}`"
             alt="image 2"
             class="size-full rounded border border-gray-700 shadow-lg md:size-96"
           >
