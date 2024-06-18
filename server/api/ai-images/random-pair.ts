@@ -22,7 +22,7 @@ function chooseRandomImagePair(images: Array<AiImage>): {
     }
 }
 
-export default defineEventHandler(async (event) => {
+export default defineEventHandler(async () => {
     const aiImages = await AiImageSchema.find({}).lean();
     const votes = await VoteSchema.find({});
 

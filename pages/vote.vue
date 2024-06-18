@@ -10,7 +10,8 @@ randomUserId.value = randomUserId.value || uuidv4();
 
 const imageUrlPrefix = '/images'
 const {data, status, refresh} = await useFetch(`/api/images/random-pair`);
-const pending = status.value === 'pending'
+// const pending = status.value === 'pending'
+const pending = true
 
 const selectedNovelty = ref('');
 const selectedSurprise = ref('');
@@ -83,10 +84,14 @@ async function submit() {
       </template>
       <template v-else-if="data">
         <div class="size-full space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0">
-          <img :src="`${imageUrlPrefix}/${data.image1.class}/${data.image1.url_id}`" alt="image 1"
-               class="size-full rounded border border-gray-700 shadow-lg md:size-96"/>
-          <img :src="`${imageUrlPrefix}/${data.image2.class}/${data.image2.url_id}`" alt="image 2"
-               class="size-full rounded border border-gray-700 shadow-lg md:size-96"/>
+          <img
+              :src="`${imageUrlPrefix}/${data.image1.class}/${data.image1.url_id}`"
+              alt="image 1"
+              class="size-full rounded border border-gray-700 shadow-lg md:size-96">
+          <img
+              :src="`${imageUrlPrefix}/${data.image2.class}/${data.image2.url_id}`"
+              alt="image 2"
+              class="size-full rounded border border-gray-700 shadow-lg md:size-96">
         </div>
 
         <div class="mt-20 flex flex-col space-y-2">

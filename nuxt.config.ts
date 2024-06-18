@@ -8,10 +8,9 @@ export default defineNuxtConfig({
 
   modules: ["@nuxt/eslint", "nuxt-mongoose", "@nuxtjs/tailwindcss", "nuxt-mongoose"],
 
-  mongoose: {
-    uri: process.env.MONGODB_URI,
-    options: {},
-    modelsDir: 'models',
-    devtools: true,
+  eslint: {
+    config: {
+      stylistic: true
+    }
   },
 })

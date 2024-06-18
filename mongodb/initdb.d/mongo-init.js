@@ -11,10 +11,10 @@ db.createUser({
     ],
   });
 
-db.createCollection("aiimages");
+db.createCollection("images");
 db.createCollection("votes");
 
-// db.aiimages.insertMany([
+// db.images.insertMany([
 //   {
 //     "_id": "plaatje-1.png",
 //   },
