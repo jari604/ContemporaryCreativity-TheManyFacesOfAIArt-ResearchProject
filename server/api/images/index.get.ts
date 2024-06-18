@@ -1,3 +1,3 @@
 export default defineEventHandler(async () => {
-    return ImageSchema.find({}).lean();
+  return ImageSchema.find({}).lean()
 })

@@ -11,8 +11,8 @@
     <p class="mb-6 text-lg font-normal text-gray-500 dark:text-gray-400 sm:px-16 lg:text-xl xl:px-48">
       Een onderzoek naar de creatieve potentie van AI gegenereerde afbeeldingen.
     </p>
-    <OpeningNL class="mb-3"/>
-    <OpeningEN/>
+    <OpeningNL class="mb-3" />
+    <OpeningEN />
   </main>
 </template>
 
