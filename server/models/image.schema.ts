@@ -12,6 +12,10 @@ export const ImageSchema = defineMongooseModel<Image>({
       type: String,
       required: true,
     },
+    score_combined: {
+      type: Number,
+      required: true,
+    },
     score_novelty: {
       type: Number,
       required: true,
@@ -24,5 +28,8 @@ export const ImageSchema = defineMongooseModel<Image>({
       type: Number,
       required: true,
     },
+  },
+  options: {
+    timestamps: true,
   },
 })

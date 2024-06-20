@@ -6,7 +6,7 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
 
-  modules: ['@nuxt/eslint', 'nuxt-mongoose', '@nuxtjs/tailwindcss', 'nuxt-mongoose'],
+  modules: ['@nuxt/eslint', 'nuxt-mongoose', '@nuxtjs/tailwindcss'],
 
   eslint: {
     config: {

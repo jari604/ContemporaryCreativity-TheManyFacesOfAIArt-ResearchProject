@@ -34,4 +34,7 @@ export const VoteSchema = defineMongooseModel<Vote>({
       required: true,
     },
   },
+  options: {
+    timestamps: true,
+  },
 })
