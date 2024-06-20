@@ -5,7 +5,7 @@
 <template>
   <div
     role="status"
-    class="animate-pulse size-full space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0"
+    class="animate-pulse space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0"
   >
     <div class="flex size-96 items-center justify-center rounded bg-gray-300 sm:w-96">
       <svg

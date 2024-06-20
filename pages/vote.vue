@@ -1,19 +1,28 @@
 <script setup lang="ts">
-import { FwbButton } from 'flowbite-vue'
+import { FwbButton, FwbImg } from 'flowbite-vue'
 import { v4 as uuidv4 } from 'uuid'
 import type { Vote } from '~/types'
 import LoadingSkeleton from '~/components/LoadingSkeleton.vue'
 
-const randomUserId = useCookie('randomUserId')
+const randomUserId = useCookie(
+  'randomUserId',
+  { maxAge: 7 * 24 * 60 * 60 },
+)
 randomUserId.value = randomUserId.value || uuidv4()
 
 const imageUrlPrefix = '/images'
 const { data, status, refresh } = await useFetch(`/api/images/random-pair`)
 const pending = status.value === 'pending'
 
-const selectedNovelty = ref('')
-const selectedSurprise = ref('')
-const selectedValue = ref('')
+const notClicked = 'bg-TUwhite text-TUcyan'
+const clicked = 'bg-TUcyan text-TUwhite'
+const button = 'border-2 border-TUcyan md:p-6 text-base hover:bg-currentColor hover:text-currentColor hover:ring-4 hover:ring-TUcyan focus:ring-2 focus:ring-TUcyan active:ring-4 active:ring-TUcyan '
+const buttonClicked = `${button}${clicked}`
+const buttonNotClicked = `${button}${notClicked}`
+
+const selectedNovelty = useState<string>('novelty', () => '')
+const selectedSurprise = useState<string>('surprise', () => '')
+const selectedValue = useState<string>('value', () => '')
 
 function setSelectedNovelty(value: string) {
   selectedNovelty.value = value
@@ -25,13 +34,6 @@ function setSelectedSurprise(value: string) {
 
 function setSelectedValue(value: string) {
   selectedValue.value = value
-}
-
-async function reset() {
-  selectedNovelty.value = ''
-  selectedSurprise.value = ''
-  selectedValue.value = ''
-  await refresh()
 }
 
 async function submit() {
@@ -61,7 +63,7 @@ async function submit() {
     user_id: randomUserId.value || 'unknown',
   }
 
-  await $fetch('/api/votes', {
+  await useFetch('/api/votes', {
     method: 'PUT',
     body: JSON.stringify(voteBody),
     headers: {
@@ -69,94 +71,103 @@ async function submit() {
     },
   })
 
-  await reset()
+  clearNuxtState()
+  await refresh()
 }
 </script>
 
 <template>
-  <main class="flex min-h-screen w-full flex-col items-center p-8">
-    <div class="flex flex-col md:my-28 items-center justify-between">
-      <template v-if="pending">
-        <LoadingSkeleton />
-      </template>
-      <template v-else-if="data">
-        <div class="size-full space-y-8 md:flex md:items-center md:space-x-8 md:space-y-0">
-          <img
-            :src="`${imageUrlPrefix}/ALL/${data.image1.url_id}`"
-            alt="image 1"
-            class="size-full rounded border border-gray-700 shadow-lg md:size-96"
-          >
+  <main class="flex min-h-screen w-full flex-col items-center md:my-28 p-8">
+    <template v-if="pending">
+      <LoadingSkeleton />
+    </template>
+    <template v-else-if="data">
+      <div class="flex flex-col md:flex-row space-y-8 md:space-x-8 md:space-y-0">
+        <fwb-img
+          :src="`${imageUrlPrefix}/ALL/${data.image1.url_id}`"
+          alt="image 1"
+          img-class="size-96 rounded border border-gray-700 shadow-lg"
+        />
 
-          <div class="flex flex-col space-y-2">
-            <div class="flex w-96 items-center justify-between gap-10">
-              <FwbButton
-                :color="selectedNovelty === data.image1.url_id ? 'red' : 'default'"
-                @click="setSelectedNovelty(data.image1.url_id)"
-              >
-                Links / Boven
-              </FwbButton>
-              <p>Vernieuwend</p>
-              <FwbButton
-                :color="selectedNovelty === data.image2.url_id ? 'red' : 'default'"
-                @click="setSelectedNovelty(data.image2.url_id)"
-              >
-                Rechts / Onder
-              </FwbButton>
-            </div>
-
-            <div class="flex w-96 items-center justify-between gap-10">
-              <FwbButton
-                :color="selectedSurprise === data.image1.url_id ? 'red' : 'default'"
-                @click="setSelectedSurprise(data.image1.url_id)"
-              >
-                Links / Boven
-              </FwbButton>
-              <p>Verassend</p>
-              <FwbButton
-                :color="selectedSurprise === data.image2.url_id ? 'red' : 'default'"
-                @click="setSelectedSurprise(data.image2.url_id)"
-              >
-                Rechts / Onder
-              </FwbButton>
-            </div>
-
-            <div class="flex w-96 items-center justify-between gap-10">
-              <FwbButton
-                :color="selectedValue === data.image1.url_id ? 'red' : 'default'"
-                @click="setSelectedValue(data.image1.url_id)"
-              >
-                Links / Boven
-              </FwbButton>
-              <p>Waardevol</p>
-              <FwbButton
-                :color="selectedValue === data.image2.url_id ? 'red' : 'default'"
-                @click="setSelectedValue(data.image2.url_id)"
-              >
-                Rechts / Onder
-              </FwbButton>
-            </div>
-
-            <div class="flex flex-col space-y-2">
-              <FwbButton
-                :disabled="!selectedNovelty || !selectedSurprise || !selectedValue"
-                @click="submit"
-              >
-                Submit
-              </FwbButton>
-            </div>
+        <div class="flex md:flex-col flex-row size-full md:size-96 justify-around">
+          <div class="flex md:flex-row flex-col items-center justify-between">
+            <FwbButton
+              :class="selectedNovelty === data.image1.url_id ? buttonClicked : buttonNotClicked"
+              @click="setSelectedNovelty(data.image1.url_id)"
+            >
+              Links
+            </FwbButton>
+            <p>Vernieuwend</p>
+            <FwbButton
+              :class="selectedNovelty === data.image2.url_id ? buttonClicked : buttonNotClicked"
+              @click="setSelectedNovelty(data.image2.url_id)"
+            >
+              Rechts
+            </FwbButton>
           </div>
 
-          <img
-            :src="`${imageUrlPrefix}/ALL/${data.image2.url_id}`"
-            alt="image 2"
-            class="size-full rounded border border-gray-700 shadow-lg md:size-96"
+          <div class="flex md:flex-row flex-col items-center justify-between">
+            <FwbButton
+              :class="selectedSurprise === data.image1.url_id ? buttonClicked : buttonNotClicked"
+              @click="setSelectedSurprise(data.image1.url_id)"
+            >
+              Boven
+            </FwbButton>
+            <p>Verassend</p>
+            <FwbButton
+              :class="selectedSurprise === data.image2.url_id ? buttonClicked : buttonNotClicked"
+              @click="setSelectedSurprise(data.image2.url_id)"
+            >
+              Onder
+            </FwbButton>
+          </div>
+
+          <div class="flex md:flex-row flex-col items-center justify-between">
+            <FwbButton
+              :class="selectedValue === data.image1.url_id ? buttonClicked : buttonNotClicked"
+              @click="setSelectedValue(data.image1.url_id)"
+            >
+              Links
+            </FwbButton>
+            <p>Waardevol</p>
+            <FwbButton
+              :class="selectedValue === data.image2.url_id ? buttonClicked : buttonNotClicked"
+              @click="setSelectedValue(data.image2.url_id)"
+            >
+              Rechts
+            </FwbButton>
+          </div>
+          <FwbButton
+            class="md:p-6 pt-3 pb-5 vertical-text text-base bg-TUdarkgreen hover:bg-TUdarkgreen hover:ring-2 hover:ring-TUlightgreen focus:ring-2 focus:ring-TUlightgreen active:ring-4 active:ring-TUlightgreen "
+            :disabled="!selectedNovelty || !selectedSurprise || !selectedValue"
+            @click="submit"
           >
+            Verzenden
+          </FwbButton>
         </div>
-      </template>
-    </div>
+
+        <fwb-img
+          :src="`${imageUrlPrefix}/ALL/${data.image2.url_id}`"
+          alt="image 2"
+          img-class="size-96 rounded border border-gray-700 shadow-lg"
+        />
+      </div>
+    </template>
   </main>
 </template>
 
-<style scoped>
+<style scoped lang="postcss">
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: -0.3em;
+  }
 
+@screen md {
+  .vertical-text {
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+    letter-spacing: normal;
+  }
+}
 </style>
