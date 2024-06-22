@@ -1,10 +1,10 @@
 import { ImageSchema } from '~/server/models/image.schema'
-import type { Image } from '~/types'
 import { VoteSchema } from '~/server/models/vote.schema'
+import type { Image } from '~/types'
 
 function chooseRandomImagePair(images: Array<Image>): {
-  image1: Image
-  image2: Image
+  image1_url: string
+  image2_url: string
 } {
   const numImages = images.length
   if (numImages < 2) {
@@ -16,9 +16,10 @@ function chooseRandomImagePair(images: Array<Image>): {
   while (index2 === index1) {
     index2 = Math.floor(Math.random() * numImages)
   }
+  // Only return the image URLs, not the whole image object, to avoid leaking sensitive data to the client
   return {
-    image1: images[index1],
-    image2: images[index2],
+    image1_url: images[index1].url_id,
+    image2_url: images[index2].url_id,
   }
 }
 
@@ -46,8 +47,8 @@ export default defineEventHandler(async () => {
     console.log('Returning one image with lowest number of votes and one random image')
     const randomImage = chooseRandomImagePair(images)
     return {
-      image1: imagesWithLowestNumVotes[0],
-      image2: randomImage.image1.url_id === imagesWithLowestNumVotes[0].url_id ? randomImage.image2 : randomImage.image1,
+      image1_url: imagesWithLowestNumVotes[0].url_id,
+      image2_url: randomImage.image1_url === imagesWithLowestNumVotes[0].url_id ? randomImage.image2_url : randomImage.image1_url,
     }
   }
 
