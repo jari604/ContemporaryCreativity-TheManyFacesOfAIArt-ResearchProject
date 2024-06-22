@@ -15,18 +15,26 @@ export const ImageSchema = defineMongooseModel<Image>({
     score_combined: {
       type: Number,
       required: true,
+      default: 1500,
+      set: (v: number) => Math.round(v), // Round before saving
     },
     score_novelty: {
       type: Number,
       required: true,
+      default: 1500,
+      set: (v: number) => Math.round(v), // Round before saving
     },
     score_surprise: {
       type: Number,
       required: true,
+      default: 1500,
+      set: (v: number) => Math.round(v), // Round before saving
     },
     score_value: {
       type: Number,
       required: true,
+      default: 1500,
+      set: (v: number) => Math.round(v), // Round before saving
     },
   },
   options: {

@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import { FwbButton, FwbImg } from 'flowbite-vue'
 import { v4 as uuidv4 } from 'uuid'
-import type { Vote } from '~/types'
 import LoadingSkeleton from '~/components/LoadingSkeleton.vue'
+import type { Vote } from '~/types'
 
-const randomUserId = useCookie(
-  'randomUserId',
-  { maxAge: 7 * 24 * 60 * 60 },
+const numberOfVotes = useCookie(
+  'numberOfVotes',
+  { maxAge: 7 * 24 * 60 * 60, default: () => 0 },
 )
 randomUserId.value = randomUserId.value || uuidv4()
 
@@ -54,24 +54,33 @@ async function submit() {
     return
   }
 
-  const voteBody: Omit<Vote, 'timestamp'> = {
-    image_id_1: data.value.image1.url_id,
-    image_id_2: data.value.image2.url_id,
+  const voteBody: Vote = {
+    image_id_1: data.value.image1_url,
+    image_id_2: data.value.image2_url,
     winner_novelty: selectedNovelty.value,
     winner_surprise: selectedSurprise.value,
     winner_value: selectedValue.value,
-    user_id: randomUserId.value || 'unknown',
+    user_id: randomUserId.value,
   }
 
-  await useFetch('/api/votes', {
-    method: 'PUT',
-    body: JSON.stringify(voteBody),
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
+  try {
+    await useFetch('/api/votes', {
+      method: 'PUT',
+      body: JSON.stringify(voteBody),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
 
-  clearNuxtState()
+    console.log('Vote submitted successfully!')
+    // Increment the vote counter only when successful
+    numberOfVotes.value++
+  }
+  catch (error) {
+    console.error('Error submitting vote', error)
+  }
+
+  clearNuxtState(['selectedNovelty', 'selectedSurprise', 'selectedValue'])
   await refresh()
 }
 </script>
@@ -82,25 +91,25 @@ async function submit() {
       <LoadingSkeleton />
     </template>
     <template v-else-if="data">
-      <div class="flex flex-col md:flex-row space-y-8 md:space-x-8 md:space-y-0">
+      <div class="flex flex-col md:flex-row space-y-4 md:space-x-8 md:space-y-0">
         <fwb-img
-          :src="`${imageUrlPrefix}/ALL/${data.image1.url_id}`"
+          :src="`${imageUrlPrefix}/${data.image1_url}`"
           alt="image 1"
-          img-class="size-96 rounded border border-gray-700 shadow-lg"
+          img-class="md:size-96 size-80 rounded border border-gray-700 shadow-lg"
         />
 
         <div class="flex md:flex-col flex-row size-full md:size-96 justify-around">
           <div class="flex md:flex-row flex-col items-center justify-between">
             <FwbButton
-              :class="selectedNovelty === data.image1.url_id ? buttonClicked : buttonNotClicked"
-              @click="setSelectedNovelty(data.image1.url_id)"
+              :class="selectedNovelty === data.image1_url ? buttonClicked : buttonNotClicked"
+              @click="setSelectedNovelty(data.image1_url)"
             >
               Links
             </FwbButton>
             <p>Vernieuwend</p>
             <FwbButton
-              :class="selectedNovelty === data.image2.url_id ? buttonClicked : buttonNotClicked"
-              @click="setSelectedNovelty(data.image2.url_id)"
+              :class="selectedNovelty === data.image2_url ? buttonClicked : buttonNotClicked"
+              @click="setSelectedNovelty(data.image2_url)"
             >
               Rechts
             </FwbButton>
@@ -108,15 +117,15 @@ async function submit() {
 
           <div class="flex md:flex-row flex-col items-center justify-between">
             <FwbButton
-              :class="selectedSurprise === data.image1.url_id ? buttonClicked : buttonNotClicked"
-              @click="setSelectedSurprise(data.image1.url_id)"
+              :class="selectedSurprise === data.image1_url ? buttonClicked : buttonNotClicked"
+              @click="setSelectedSurprise(data.image1_url)"
             >
               Boven
             </FwbButton>
             <p>Verassend</p>
             <FwbButton
-              :class="selectedSurprise === data.image2.url_id ? buttonClicked : buttonNotClicked"
-              @click="setSelectedSurprise(data.image2.url_id)"
+              :class="selectedSurprise === data.image2_url ? buttonClicked : buttonNotClicked"
+              @click="setSelectedSurprise(data.image2_url)"
             >
               Onder
             </FwbButton>
@@ -124,15 +133,15 @@ async function submit() {
 
           <div class="flex md:flex-row flex-col items-center justify-between">
             <FwbButton
-              :class="selectedValue === data.image1.url_id ? buttonClicked : buttonNotClicked"
-              @click="setSelectedValue(data.image1.url_id)"
+              :class="selectedValue === data.image1_url ? buttonClicked : buttonNotClicked"
+              @click="setSelectedValue(data.image1_url)"
             >
               Links
             </FwbButton>
             <p>Waardevol</p>
             <FwbButton
-              :class="selectedValue === data.image2.url_id ? buttonClicked : buttonNotClicked"
-              @click="setSelectedValue(data.image2.url_id)"
+              :class="selectedValue === data.image2_url ? buttonClicked : buttonNotClicked"
+              @click="setSelectedValue(data.image2_url)"
             >
               Rechts
             </FwbButton>
@@ -147,9 +156,9 @@ async function submit() {
         </div>
 
         <fwb-img
-          :src="`${imageUrlPrefix}/ALL/${data.image2.url_id}`"
+          :src="`${imageUrlPrefix}/${data.image2_url}`"
           alt="image 2"
-          img-class="size-96 rounded border border-gray-700 shadow-lg"
+          img-class="md:size-96 size-80 rounded border border-gray-700 shadow-lg"
         />
       </div>
     </template>
