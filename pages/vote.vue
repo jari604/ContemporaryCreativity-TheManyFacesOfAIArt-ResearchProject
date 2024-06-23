@@ -64,7 +64,7 @@ function continueVoting() {
 
 function finishVoting() {
   clearNuxtState(['novelty', 'surprise', 'value'])
-  navigateTo('/')
+  navigateTo('/contact')
 }
 
 const imageUrlPrefix = '/images'
@@ -144,7 +144,7 @@ async function submit() {
         >
           <template #header>
             <FwbHeading tag="h3">
-              Gefeliciteerd u heeft {{ numberOfVotes }} keer gestemd!
+              Gefeliciteerd, u heeft {{ numberOfVotes }} keer gestemd!
             </FwbHeading>
           </template>
           <template #body>
@@ -152,8 +152,8 @@ async function submit() {
               U heeft het vereiste aantal stemmen uitgebracht. Heel erg bedankt!
             </FwbP>
             <FwbP>Wilt u blijven stemmen om mij te helpen de ELO-scores te verbeteren? Door extra stemmen uit te brengen vergelijkt u de creativiteit van nog meer mogelijke paren van foto's. Door meer foto's met elkaar te vergelijken wordt de uiteindelijke ranglijst steeds beter.</FwbP>
-            <FwbP>Klikt u dan op de groene knop, dan kunt u nog 10 stemmen uitbrengen. Zo niet dat drukt u op de oranje knop.</FwbP>
-            <FwbP>Bedankt voor uw deelname en tijd!</FwbP>
+            <FwbP>Klik dan op de groene knop, dan kunt u nog 10 stemmen uitbrengen. Zo niet dan drukt u op de oranje knop.</FwbP>
+            <FwbP><strong class="font-bold text-gray-900">Bedankt voor uw deelname en tijd!</strong></FwbP>
           </template>
           <template #footer>
             <div class="flex justify-around gap-4">
@@ -161,7 +161,7 @@ async function submit() {
                 class="md:p-6 text-base bg-TUdarkgreen hover:bg-TUdarkgreen hover:ring-2 hover:ring-TUlightgreen focus:ring-2 focus:ring-TUlightgreen active:ring-4 active:ring-TUlightgreen"
                 @click="continueVoting"
               >
-                Nog 10x stemmen
+                Nog 10 keer stemmen
               </FwbButton>
               <FwbButton
                 class="md:p-6 text-base bg-TUorange hover:bg-TUorange hover:ring-2 hover:ring-TUyellow focus:ring-2 focus:ring-TUyellow active:ring-4 active:ring-TUyellow"
@@ -218,7 +218,7 @@ async function submit() {
               </svg>
             </FwbButton>
             <FwbP>
-              Vernieuwend
+              Nieuw
             </FwbP>
             <FwbButton
               :class="selectedNovelty === data.image2_url ? buttonClicked : buttonNotClicked"
@@ -318,7 +318,7 @@ async function submit() {
               </svg>
             </FwbButton>
             <FwbP>
-              Waardevol
+              Waarde
             </FwbP>
             <FwbButton
               :class="selectedValue === data.image2_url ? buttonClicked : buttonNotClicked"
@@ -345,11 +345,11 @@ async function submit() {
           </div>
 
           <FwbButton
-            class="md:p-6 pt-3 pb-5 vertical-text text-base bg-TUdarkgreen hover:bg-TUdarkgreen hover:ring-2 hover:ring-TUlightgreen focus:ring-2 focus:ring-TUlightgreen active:ring-4 active:ring-TUlightgreen "
+            class="md:p-6 pt-3 pb-5 p-2 vertical-text text-base bg-TUdarkgreen hover:bg-TUdarkgreen hover:ring-2 hover:ring-TUlightgreen focus:ring-2 focus:ring-TUlightgreen active:ring-4 active:ring-TUlightgreen "
             :disabled="!selectedNovelty || !selectedSurprise || !selectedValue"
             @click="submit"
           >
-            Verzenden
+            Verstuur
           </FwbButton>
         </div>
 
@@ -373,7 +373,7 @@ async function submit() {
   .vertical-text {
     writing-mode: vertical-rl;
     text-orientation: upright;
-    letter-spacing: -0.3em;
+    letter-spacing: -0.20em;
   }
 
   @screen md {

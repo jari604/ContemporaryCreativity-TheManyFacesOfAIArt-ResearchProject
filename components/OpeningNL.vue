@@ -1,9 +1,12 @@
 <script setup lang="ts">
-import { FwbP, FwbHeading } from 'flowbite-vue'
+import { FwbP, FwbHeading, FwbCard } from 'flowbite-vue'
 </script>
 
 <template>
-  <div class="p-5 max-w-prose text-justify">
+  <FwbCard
+    variant="horizontal"
+    class="p-5 max-w-prose text-justify"
+  >
     <FwbHeading
       tag="h5"
       class="mb-2 text-2xl font-bold tracking-tight text-gray-900"
@@ -15,34 +18,34 @@ import { FwbP, FwbHeading } from 'flowbite-vue'
     </FwbP>
     <FwbP>
       U wordt uitgenodigd om deel te nemen aan een onderzoek genaamd
-      <strong class="font-semibold text-gray-900">Contemporary Creativity: The Many Faces of AI Art.</strong>
+      <strong class="font-bold text-gray-900">Contemporary Creativity: The Many Faces of AI Art.</strong>
       Dit onderzoek wordt uitgevoerd door Jari de Keijzer, Bachelor student Computer Science & Engineering aan de TU
       Delft, onder begeleiding van Dr. Anna Lukina.
     </FwbP>
 
     <FwbP>
       Het doel van dit onderzoek is om te ontdekken of afbeeldingen die gegenereerd worden door een specifiek
-      Kunstmatige Intelligentie (AI) model creatief kunnen lijken. Om deze vraag te beantwoorden, stemt u, de
-      deelnemer, op de creativiteit van paren van afbeeldingen. Voor elk paar afbeeldingen stemt u op welke afbeelding
-      u het meest <strong class="font-semibold text-gray-900"> vernieuwend, verrassend of waardevol</strong> vindt. Dit
-      betekent dat u voor elk paar afbeeldingen drie stemmen moet uitbrengen. De paren afbeeldingen bevatten door AI
-      gegenereerde afbeeldingen en niet-gegenereerde afbeeldingen uit de echte wereld. De AI afbeeldingen zullen zowel
-      accuratere (realistischer) als 'creatievere' (vreemdere) afbeeldingen bevatten. Tijdens het stemproces krijg je NIET te
-      zien tot welke categorie de afbeelding behoort, dit is onderdeel van het experiment. Deelnemen aan dit onderzoek
-      kost je ongeveer 15 minuten.
+      Kunstmatige Intelligentie (AI) model creatief kunnen lijken. Om deze vraag te beantwoorden, stemt u, als
+      deelnemer, op de creativiteit van paren van afbeeldingen. Voor elk paar afbeeldingen stemt u op de afbeelding die
+      u het meest <strong class="font-bold text-gray-900"> vernieuwend, verrassend of waardevol</strong> vindt. Dit
+      betekent dat u voor elk paar afbeeldingen drie stemmen moet uitbrengen. De paren afbeeldingen bevatten zowel door AI
+      gegenereerde als niet-gegenereerde afbeeldingen. De AI afbeeldingen zullen zowel realistischere als
+      'creatievere' (soms wat vreemde) plaatjes bevatten. Tijdens het stemproces krijgt u NIET te
+      zien tot welke categorie de afbeelding behoort, dit is onderdeel van het onderzoek. Deelnemen aan dit onderzoek
+      kost u ongeveer 15 minuten.
     </FwbP>
 
     <FwbP>
-      Dit onderzoek is <strong class="font-semibold text-gray-900">volledig anoniem</strong>, er worden dus GEEN persoonlijke gegevens verzameld. Deze stemwebsite wordt
-      gehost op een server die eigendom is van de TU Delft, waarop geen andere gegevens dan uw anonieme stemmen worden
-      verzameld. Deze stemmen worden gebruikt om de afbeeldingen te rangschikken op basis van een ELO-score (bekend
-      van schaken). Met deze ranking wordt de creativiteit van het AI-model geëvalueerd. De verzamelde stemmen, de
-      ELO-ranking en de geëvalueerde resultaten worden gepubliceerd en gepresenteerd in een paper die publiekelijk
-      beschikbaar zal zijn op de TU Delft repository.
+      Dit onderzoek is <strong class="font-bold text-gray-900">volledig anoniem</strong>, er worden dus GEEN
+      persoonlijke gegevens verzameld. Deze stemwebsite wordt gehost op een server die eigendom is van de TU Delft,
+      waarop geen andere gegevens dan uw anonieme stemmen worden verzameld. Deze stemmen worden gebruikt om de
+      afbeeldingen te rangschikken op basis van een ELO-score (uitleg op de volgende pagina). Met deze ranking wordt de
+      creativiteit van het AI-model geëvalueerd. De verzamelde stemmen, de ELO-ranking en de geëvalueerde resultaten
+      worden gepubliceerd en gepresenteerd in een paper die publiekelijk beschikbaar zal zijn op de TU Delft repository.
     </FwbP>
 
     <FwbP>
-      Iedereen van <strong class="font-semibold text-gray-900">18 jaar of ouder</strong> mag meedoen aan dit
+      Iedereen van <strong class="font-bold text-gray-900">18 jaar of ouder</strong> mag meedoen aan dit
       onderzoek. Het is belangrijk voor dit onderzoek om een gevarieerde verzameling stemmen te krijgen. Meer
       deelnemers verhoogt de nauwkeurigheid van de ranglijst. Daarom is het u, de deelnemer, toegestaan om dit
       onderzoek met anderen te delen.
@@ -98,7 +101,7 @@ import { FwbP, FwbHeading } from 'flowbite-vue'
         />
       </svg>
     </NuxtLink>
-  </div>
+  </FwbCard>
 </template>
 
 <style scoped>

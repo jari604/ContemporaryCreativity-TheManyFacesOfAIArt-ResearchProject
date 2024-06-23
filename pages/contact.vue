@@ -11,29 +11,29 @@ import { FwbCard, FwbHeading, FwbP } from 'flowbite-vue'
       <div class="p-5 text-justify">
         <FwbHeading
           tag="h5"
-          class="mb-4 text-2xl font-bold tracking-tight text-gray-900"
+          class="mb-4 text-2xl font-bold tracking-tight text-transparent bg-clip-text bg-gradient-to-r to-TUdarkblue from-TUcyan"
         >
-          Jari de Keijzer
+          Bedankt voor uw deelname!
         </FwbHeading>
         <FwbP>
           Hi!
         </FwbP>
         <FwbP>
           Ik ben Jari de Keijzer, een dubbele bachelor student in technische informatica en filosofie. Deze website en
-          het experiment wat ik daarmee uitvoer is onderdeel van mijn bachelor thesis voor de informatica bachelor.
+          het onderzoek wat ik daarmee uitvoer is onderdeel van mijn bachelor thesis voor de informatica bachelor.
         </FwbP>
         <FwbP>
-          Mijn onderzoek gaat over de creatieve potentie van AI gegenereerde afbeeldingen. Ik ben benieuwd naar jouw
-          mening over de creativiteit van deze afbeeldingen. Na de afronding van dit experiment zal ik de ranking van
-          deze foto's gaan analyseren en daar zal ik een aantal conclusies uit trekken. Het leuke van dit onderwerp, is
-          dat het een combinatie is van technische informatica en filosofie is.
+          Mijn onderzoek gaat over de creatieve potentie van AI (kunstmatige intelligentie) gegenereerde afbeeldingen.
+          Ik ben erg benieuwd naar uw intuïtieve mening over de creativiteit van deze afbeeldingen. Na de afronding van
+          dit onderzoek zal ik de rangschikking van deze foto's gaan analyseren en daaruit een aantal conclusies trekken. Het uitdagende van dit onderwerp is
+          dat het een combinatie van technische informatica en filosofie is.
         </FwbP>
         <FwbP>
-          Mocht je vragen hebben over mijn onderzoek, of wil je de resultaten na afloop ontvangen, stuur mij dan een
+          Mocht u vragen hebben over mijn onderzoek of wilt u de resultaten na afloop ontvangen, stuur mij dan een
           mail via onderstaande knop.
         </FwbP>
         <FwbP>
-          Heel erg bedankt voor je deelname!
+          Heel erg bedankt voor uw deelname!
         </FwbP>
         <FwbP>
           Jari de Keijzer
@@ -41,7 +41,7 @@ import { FwbCard, FwbHeading, FwbP } from 'flowbite-vue'
 
         <NuxtLink
           to="mailto:j.n.dekeijzer@student.tudelft.nl?subject=Research Project"
-          class="flex w-max py-2.5 px-5 rounded-lg font-medium text-TUwhite bg-TUcyan text-base hover:bg-TUdarkblue focus:ring-2 focus:outline-none focus:ring-TUblue active:ring-4 active:ring-TUblue"
+          class="flex w-max py-2.5 px-5 m-auto rounded-lg font-medium text-TUwhite bg-TUcyan text-base hover:bg-TUdarkblue focus:ring-2 focus:outline-none focus:ring-TUblue active:ring-4 active:ring-TUblue"
         >
           Stuur een e-mail
           <svg
