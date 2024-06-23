@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FwbButton, FwbP, FwbHeading } from 'flowbite-vue'
+import { FwbP, FwbHeading } from 'flowbite-vue'
 </script>
 
 <template>
@@ -77,30 +77,26 @@ import { FwbButton, FwbP, FwbHeading } from 'flowbite-vue'
 
     <NuxtLink
       to="/explanation"
-      class="flex w-full"
+      class="flex py-2.5 px-5 rounded-lg font-medium text-TUwhite w-full bg-TUcyan text-base hover:bg-TUdarkblue focus:ring-2 focus:outline-none focus:ring-TUblue active:ring-4 active:ring-TUblue"
     >
-      <FwbButton
-        class="w-full bg-TUcyan hover:bg-TUdarkblue focus:outline-none focus:ring-4 focus:ring-TUblue active:outline-none active:ring-4 active:ring-TUblue"
+      Ik begrijp het en doe mee
+      <svg
+        class="size-[24px] inline"
+        aria-hidden="true"
+        xmlns="http://www.w3.org/2000/svg"
+        width="24"
+        height="24"
+        fill="currentColor"
+        viewBox="0 0 24 24"
       >
-        Ik begrijp het en doe mee
-        <svg
-          class="size-[24px] inline"
-          aria-hidden="true"
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          viewBox="0 0 24 24"
-        >
-          <path
-            stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M19 12H5m14 0-4 4m4-4-4-4"
-          />
-        </svg>
-      </FwbButton>
+        <path
+          stroke="currentColor"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M19 12H5m14 0-4 4m4-4-4-4"
+        />
+      </svg>
     </NuxtLink>
   </div>
 </template>
