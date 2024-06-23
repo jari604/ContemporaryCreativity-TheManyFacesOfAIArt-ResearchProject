@@ -13,4 +13,14 @@ export default defineNuxtConfig({
       stylistic: true,
     },
   },
+
+  runtimeConfig: {
+    public: {
+      minNumberOfVotesPerParticipant: parseInt(process.env.MIN_NUMBER_OF_VOTES_PER_PARTICIPANT || '20', 10),
+
+    },
+    private: {
+      eloKFactor: parseInt(process.env.ELO_K_FACTOR || '32', 10),
+    },
+  },
 })

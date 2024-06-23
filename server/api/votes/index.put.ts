@@ -1,6 +1,7 @@
 import type { Image, Vote } from '~/types'
 
-const kFactor = parseInt(process.env.ELO_K_FACTOR || '32', 10) // Get from env, default to 32
+const config = useRuntimeConfig()
+const kFactor = config.private.eloKFactor // Get from env, default to 32
 
 export default defineEventHandler(async (event) => {
   const voteData: Vote = await readBody(event)
