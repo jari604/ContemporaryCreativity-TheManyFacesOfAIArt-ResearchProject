@@ -268,7 +268,7 @@ async function submit() {
               </svg>
             </FwbButton>
             <FwbP>
-              Verassend
+              Verrassend
             </FwbP>
             <FwbButton
               :class="selectedSurprise === data.image2_url ? buttonClicked : buttonNotClicked"

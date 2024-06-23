@@ -37,7 +37,7 @@ import { FwbCard, FwbHeading, FwbP } from 'flowbite-vue'
             </li>
             <li>Klik op de groene 'Verstuur' knop</li>
             <li>De volgende twee foto's verschijnen</li>
-            <li>Gevraagd wordt om 20 keer te stemmen</li>
+            <li>Gevraagd wordt om {{ useRuntimeConfig().public.minNumberOfVotesPerParticipant }} keer te stemmen</li>
             <li>Uw deelname kost ongeveer 15 minuten</li>
           </ol>
         </Fwb-p>
