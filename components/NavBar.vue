@@ -49,7 +49,7 @@ function setLocaleAndCloseModal(locale: string) {
             id="flag-icons-nl"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 640 480"
-            class="rounded-lg cursor-pointer"
+            class="rounded-lg cursor-pointer w-32 h-24 md:w-64 md:h-48"
             @click="setLocaleAndCloseModal('nl')"
           >
             <path
@@ -69,7 +69,7 @@ function setLocaleAndCloseModal(locale: string) {
             id="flag-icons-gb"
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 640 480"
-            class="rounded-lg cursor-pointer"
+            class="rounded-lg cursor-pointer w-32 h-24 md:w-64 md:h-48"
             @click="setLocaleAndCloseModal('en')"
           >
             <path
