@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { FwbButton, FwbHeading, FwbImg, FwbModal, FwbP } from 'flowbite-vue'
 import { v4 as uuidv4 } from 'uuid'
-import LoadingSkeleton from '~/components/LoadingSkeleton.vue'
 import type { Vote } from '~/types'
 
 const numberOfVotes = useCookie(
@@ -26,6 +25,12 @@ const randomUserId = useCookie('randomUserId', {
     return uuidv4()
   },
 })
+
+const localePreference = useCookie('locale', {
+  maxAge: 7 * 24 * 60 * 60,
+})
+const { setLocale } = useI18n()
+setLocale(localePreference.value ? localePreference.value : 'nl')
 
 const notClicked = 'bg-TUwhite text-TUcyan'
 const clicked = 'bg-TUcyan text-TUwhite'
@@ -218,7 +223,7 @@ async function submit() {
               </svg>
             </FwbButton>
             <FwbP>
-              Nieuw
+              {{ $t('novelty') }}
             </FwbP>
             <FwbButton
               :class="selectedNovelty === data.image2_url ? buttonClicked : buttonNotClicked"
@@ -268,7 +273,7 @@ async function submit() {
               </svg>
             </FwbButton>
             <FwbP>
-              Verrassend
+              {{ $t('surprising') }}
             </FwbP>
             <FwbButton
               :class="selectedSurprise === data.image2_url ? buttonClicked : buttonNotClicked"
@@ -318,7 +323,7 @@ async function submit() {
               </svg>
             </FwbButton>
             <FwbP>
-              Waarde
+              {{ $t('value') }}
             </FwbP>
             <FwbButton
               :class="selectedValue === data.image2_url ? buttonClicked : buttonNotClicked"
@@ -349,7 +354,7 @@ async function submit() {
             :disabled="!selectedNovelty || !selectedSurprise || !selectedValue"
             @click="submit"
           >
-            Verstuur
+            {{ $t('submit') }}
           </FwbButton>
         </div>
 

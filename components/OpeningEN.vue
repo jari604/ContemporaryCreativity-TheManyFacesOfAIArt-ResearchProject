@@ -5,7 +5,7 @@ import { FwbP, FwbHeading, FwbCard } from 'flowbite-vue'
 <template>
   <FwbCard
     variant="horizontal"
-    class="mt-4 p-5 max-w-prose text-justify"
+    class="p-5 max-w-prose text-justify"
   >
     <FwbHeading
       tag="h5"
