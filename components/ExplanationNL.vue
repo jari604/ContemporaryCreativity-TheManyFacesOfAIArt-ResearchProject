@@ -19,7 +19,7 @@ import { FwbCard, FwbHeading, FwbP } from 'flowbite-vue'
           <li>U krijgt twee foto's te zien</li>
           <li>
             Per paar foto's, maakt u <strong class="font-bold text-gray-900">drie</strong> keuzes:
-            <ul class="ps-3 mt-2 list-disc list-inside">
+            <ul class="md:ps-3 ps-1 mt-2 list-disc list-inside">
               <li>Welke foto is het meest <strong class="font-bold text-gray-900">vernieuwend?</strong></li>
               <li>Welke foto is het meest <strong class="font-bold text-gray-900">verrassend?</strong></li>
               <li>Welke foto is het meest <strong class="font-bold text-gray-900">waardevol?</strong></li>

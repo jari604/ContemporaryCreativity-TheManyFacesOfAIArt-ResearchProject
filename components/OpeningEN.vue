@@ -5,7 +5,7 @@ import { FwbP, FwbHeading, FwbCard } from 'flowbite-vue'
 <template>
   <FwbCard
     variant="horizontal"
-    class="p-5 max-w-prose text-justify"
+    class="p-5 max-w-prose text-justify text-pretty"
   >
     <FwbHeading
       tag="h5"
@@ -71,9 +71,9 @@ import { FwbP, FwbHeading, FwbCard } from 'flowbite-vue'
     </FwbP>
     <NuxtLink
       to="/explanation"
-      class="flex py-2.5 px-5 rounded-lg font-medium text-TUwhite w-full bg-TUcyan text-base hover:bg-TUdarkblue focus:ring-2 focus:outline-none focus:ring-TUblue active:ring-4 active:ring-TUblue"
+      class="flex py-2.5 px-4 rounded-lg font-medium text-TUwhite w-full bg-TUcyan text-base hover:bg-TUdarkblue focus:ring-2 focus:outline-none focus:ring-TUblue active:ring-4 active:ring-TUblue"
     >
-      I understand and want to participate
+      I understand and will participate
       <svg
         class="size-[24px] inline"
         aria-hidden="true"

@@ -18,8 +18,8 @@ import { FwbCard, FwbHeading, FwbP } from 'flowbite-vue'
         <ol class="space-y-1 list-decimal list-inside">
           <li>You will see two photos</li>
           <li>
-            For each pair of photos, you make <strong class="font-bold text-gray-900">three</strong> choices:
-            <ul class="ps-3 mt-2 list-disc list-inside">
+            Make <strong class="font-bold text-gray-900">three</strong> choices per pair of photos:
+            <ul class="md:ps-3 ps-1 mt-2 list-disc list-inside">
               <li>Which photo is the most <strong class="font-bold text-gray-900">novel?</strong></li>
               <li>Which photo is the most <strong class="font-bold text-gray-900">surprising?</strong></li>
               <li>Which photo is the most <strong class="font-bold text-gray-900">valuable?</strong></li>
@@ -27,13 +27,13 @@ import { FwbCard, FwbHeading, FwbP } from 'flowbite-vue'
           </li>
           <li>Click on the buttons between the photos</li>
           <li>
-            Choose based on your first <strong class="font-bold text-gray-900">impulse</strong> and
+            Choose based on <strong class="font-bold text-gray-900">impulse</strong> and
             <strong class="font-bold text-gray-900">intuition</strong>
           </li>
           <li>Click the green 'Submit' button</li>
           <li>The next two photos will appear</li>
           <li>You are asked to vote {{ useRuntimeConfig().public.minNumberOfVotesPerParticipant }} times</li>
-          <li>Your participation takes approximately 15 minutes</li>
+          <li>Participating takes about 15 minutes</li>
         </ol>
       </Fwb-p>
     </Fwb-card>

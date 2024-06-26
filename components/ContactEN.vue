@@ -33,7 +33,7 @@ import { FwbCard, FwbHeading, FwbP } from 'flowbite-vue'
         email via the button below.
       </FwbP>
       <FwbP>
-        Thank you very much for your participation!
+        Thank you very much for participating!
       </FwbP>
       <FwbP>
         Jari de Keijzer
