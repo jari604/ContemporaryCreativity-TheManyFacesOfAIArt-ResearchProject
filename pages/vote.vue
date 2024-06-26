@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FwbButton, FwbHeading, FwbImg, FwbModal, FwbP } from 'flowbite-vue'
+import { FwbButton, FwbImg, FwbP } from 'flowbite-vue'
 import { v4 as uuidv4 } from 'uuid'
 import type { Vote } from '~/types'
 
@@ -19,7 +19,7 @@ const randomUserId = useCookie('randomUserId', {
   maxAge: 31 * 24 * 60 * 60,
   default: () => {
     if (numberOfVotes.value !== 0 || targetVotes.value !== useRuntimeConfig().public.minNumberOfVotesPerParticipant) {
-      numberOfVotes.value = 0 // Reset if a new user is detected and the number of votes is not 1
+      numberOfVotes.value = 0 // Reset if a new user is detected and the number of votes is not 0
       targetVotes.value = useRuntimeConfig().public.minNumberOfVotesPerParticipant
     }
     return uuidv4()
@@ -63,11 +63,6 @@ watch(progress, (newProgress) => {
 function continueVoting() {
   targetVotes.value += 10
   showModal.value = false
-}
-
-function finishVoting() {
-  clearNuxtState(['novelty', 'surprise', 'value'])
-  navigateTo('/contact')
 }
 
 const imageUrlPrefix = '/images'
@@ -139,42 +134,12 @@ async function submit() {
     </template>
     <template v-else-if="data">
       <template v-if="showModal">
-        <div class="fixed inset-0 bg-black bg-opacity-50 z-50" />
-        <FwbModal
-          not-escapable
-          persistent
-          class="text-pretty"
-        >
-          <template #header>
-            <FwbHeading tag="h3">
-              Gefeliciteerd, u heeft {{ numberOfVotes }} keer gestemd!
-            </FwbHeading>
-          </template>
-          <template #body>
-            <FwbP>
-              U heeft het vereiste aantal stemmen uitgebracht. Heel erg bedankt!
-            </FwbP>
-            <FwbP>Wilt u blijven stemmen om mij te helpen de ELO-scores te verbeteren? Door extra stemmen uit te brengen vergelijkt u de creativiteit van nog meer mogelijke paren van foto's. Door meer foto's met elkaar te vergelijken wordt de uiteindelijke ranglijst steeds beter.</FwbP>
-            <FwbP>Klik dan op de groene knop, dan kunt u nog 10 stemmen uitbrengen. Zo niet dan drukt u op de oranje knop.</FwbP>
-            <FwbP><strong class="font-bold text-gray-900">Bedankt voor uw deelname en tijd!</strong></FwbP>
-          </template>
-          <template #footer>
-            <div class="flex justify-around gap-4">
-              <FwbButton
-                class="md:p-6 text-base bg-TUdarkgreen hover:bg-TUdarkgreen hover:ring-2 hover:ring-TUlightgreen focus:ring-2 focus:ring-TUlightgreen active:ring-4 active:ring-TUlightgreen"
-                @click="continueVoting"
-              >
-                Nog 10 keer stemmen
-              </FwbButton>
-              <FwbButton
-                class="md:p-6 text-base bg-TUorange hover:bg-TUorange hover:ring-2 hover:ring-TUyellow focus:ring-2 focus:ring-TUyellow active:ring-4 active:ring-TUyellow"
-                @click="finishVoting"
-              >
-                Stoppen met stemmen
-              </FwbButton>
-            </div>
-          </template>
-        </FwbModal>
+        <template v-if="locale==='en'">
+          <VotingModalEN @continue-voting="continueVoting" />
+        </template>
+        <template v-else>
+          <VotingModalNL @continue-voting="continueVoting" />
+        </template>
       </template>
 
       <div class="flex flex-col md:flex-row space-y-4 md:space-x-8 md:space-y-0 content-evenly">
@@ -200,6 +165,7 @@ async function submit() {
           <div class="flex md:flex-row flex-col items-center justify-between">
             <FwbButton
               :class="selectedNovelty === data.image1_url ? buttonClicked : buttonNotClicked"
+              :disabled="pending"
               @click="setSelectedNovelty(data.image1_url)"
             >
               <svg
@@ -225,6 +191,7 @@ async function submit() {
             </FwbP>
             <FwbButton
               :class="selectedNovelty === data.image2_url ? buttonClicked : buttonNotClicked"
+              :disabled="pending"
               @click="setSelectedNovelty(data.image2_url)"
             >
               <svg
@@ -250,6 +217,7 @@ async function submit() {
           <div class="flex md:flex-row flex-col items-center justify-between">
             <FwbButton
               :class="selectedSurprise === data.image1_url ? buttonClicked : buttonNotClicked"
+              :disabled="pending"
               @click="setSelectedSurprise(data.image1_url)"
             >
               <svg
@@ -275,6 +243,7 @@ async function submit() {
             </FwbP>
             <FwbButton
               :class="selectedSurprise === data.image2_url ? buttonClicked : buttonNotClicked"
+              :disabled="pending"
               @click="setSelectedSurprise(data.image2_url)"
             >
               <svg
@@ -300,6 +269,7 @@ async function submit() {
           <div class="flex md:flex-row flex-col items-center justify-between">
             <FwbButton
               :class="selectedValue === data.image1_url ? buttonClicked : buttonNotClicked"
+              :disabled="pending"
               @click="setSelectedValue(data.image1_url)"
             >
               <svg
@@ -325,6 +295,7 @@ async function submit() {
             </FwbP>
             <FwbButton
               :class="selectedValue === data.image2_url ? buttonClicked : buttonNotClicked"
+              :disabled="pending"
               @click="setSelectedValue(data.image2_url)"
             >
               <svg
@@ -349,7 +320,7 @@ async function submit() {
 
           <FwbButton
             class="md:p-6 pt-3 pb-5 p-2 vertical-text text-base bg-TUdarkgreen hover:bg-TUdarkgreen hover:ring-2 hover:ring-TUlightgreen focus:ring-2 focus:ring-TUlightgreen active:ring-4 active:ring-TUlightgreen "
-            :disabled="!selectedNovelty || !selectedSurprise || !selectedValue"
+            :disabled="!selectedNovelty || !selectedSurprise || !selectedValue || pending"
             @click="submit"
           >
             {{ $t('submit') }}
