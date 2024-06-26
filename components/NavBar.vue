@@ -1,12 +1,9 @@
 <script setup lang="ts">
 import { FwbHeading, FwbModal, FwbNavbar, FwbNavbarCollapse, FwbNavbarLink, FwbNavbarLogo } from 'flowbite-vue'
 
-const localePreference = useCookie('locale', {
-  maxAge: 7 * 24 * 60 * 60,
-})
+const localePreference = useCookie('locale')
 
 const { locale, setLocale } = useI18n()
-setLocale(localePreference.value ? localePreference.value : 'nl')
 
 const showLanguageModal = useState('showLanguageModal', () => !localePreference.value)
 

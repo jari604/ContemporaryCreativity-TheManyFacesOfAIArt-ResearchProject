@@ -1,10 +1,5 @@
 <script setup lang="ts">
-const localePreference = useCookie('locale', {
-  maxAge: 7 * 24 * 60 * 60,
-})
-
-const { locale, setLocale } = useI18n()
-setLocale(localePreference.value ? localePreference.value : 'nl')
+const { locale } = useI18n()
 </script>
 
 <template>

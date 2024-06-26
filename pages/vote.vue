@@ -5,18 +5,18 @@ import type { Vote } from '~/types'
 
 const numberOfVotes = useCookie(
   'numberOfVotes',
-  { maxAge: 7 * 24 * 60 * 60, default: () => 0 },
+  { maxAge: 31 * 24 * 60 * 60, default: () => 0 },
 )
 
 const targetVotes = useCookie('targetVotes', {
-  maxAge: 7 * 24 * 60 * 60,
+  maxAge: 31 * 24 * 60 * 60,
   default: () => {
     return useRuntimeConfig().public.minNumberOfVotesPerParticipant
   },
 })
 
 const randomUserId = useCookie('randomUserId', {
-  maxAge: 7 * 24 * 60 * 60,
+  maxAge: 31 * 24 * 60 * 60,
   default: () => {
     if (numberOfVotes.value !== 0 || targetVotes.value !== useRuntimeConfig().public.minNumberOfVotesPerParticipant) {
       numberOfVotes.value = 0 // Reset if a new user is detected and the number of votes is not 1
@@ -26,10 +26,8 @@ const randomUserId = useCookie('randomUserId', {
   },
 })
 
-const localePreference = useCookie('locale', {
-  maxAge: 7 * 24 * 60 * 60,
-})
-const { setLocale } = useI18n()
+const localePreference = useCookie('locale')
+const { locale, setLocale } = useI18n()
 setLocale(localePreference.value ? localePreference.value : 'nl')
 
 const notClicked = 'bg-TUwhite text-TUcyan'
