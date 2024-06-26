@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { FwbButton, FwbImg, FwbP } from 'flowbite-vue'
+import { FwbAlert, FwbButton, FwbImg, FwbP } from 'flowbite-vue'
 import { v4 as uuidv4 } from 'uuid'
 import type { Vote } from '~/types'
 
@@ -85,6 +85,14 @@ function setSelectedValue(value: string) {
   selectedValue.value = value
 }
 
+const showAlert = useState('showAlert', () => false)
+const alertMessage = useState('alertMessage', () => '')
+
+function closeAlert() {
+  showAlert.value = false
+  alertMessage.value = ''
+}
+
 async function submit() {
   if (!data.value) {
     console.error('No data')
@@ -106,7 +114,7 @@ async function submit() {
   }
 
   try {
-    await useFetch('/api/votes', {
+    const { error } = await useFetch('/api/votes', {
       method: 'PUT',
       body: JSON.stringify(voteBody),
       headers: {
@@ -114,9 +122,15 @@ async function submit() {
       },
     })
 
-    console.log('Vote submitted successfully!')
-    // Increment the vote counter only when successful
-    numberOfVotes.value++
+    if (error.value) {
+      alertMessage.value = error.value.data.message
+      showAlert.value = true
+    }
+    else {
+      console.log('Vote submitted successfully!')
+      // Increment the vote counter only when successful
+      numberOfVotes.value++
+    }
   }
   catch (error) {
     console.error('Error submitting vote', error)
@@ -140,6 +154,18 @@ async function submit() {
         <template v-else>
           <VotingModalNL @continue-voting="continueVoting" />
         </template>
+      </template>
+
+      <template v-if="showAlert">
+        <fwb-alert
+          icon
+          closable
+          type="danger"
+          class="alert z-50 top-80 md:alert md:z-0 md:top-0 md:mb-4"
+          @close="closeAlert"
+        >
+          {{ alertMessage }}
+        </fwb-alert>
       </template>
 
       <div class="flex flex-col md:flex-row space-y-4 md:space-x-8 md:space-y-0 content-evenly">
@@ -350,11 +376,19 @@ async function submit() {
     letter-spacing: -0.20em;
   }
 
+  .alert {
+    position: fixed;
+  }
+
   @screen md {
     .vertical-text {
       writing-mode: horizontal-tb;
       text-orientation: mixed;
       letter-spacing: normal;
+    }
+
+    .alert {
+      position: relative;
     }
   }
 </style>
