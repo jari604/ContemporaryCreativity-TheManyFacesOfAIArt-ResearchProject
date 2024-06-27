@@ -191,7 +191,6 @@ async function submit() {
           <div class="flex md:flex-row flex-col items-center justify-between">
             <FwbButton
               :class="selectedNovelty === data.image1_url ? buttonClicked : buttonNotClicked"
-              :disabled="pending"
               @click="setSelectedNovelty(data.image1_url)"
             >
               <svg
@@ -217,7 +216,6 @@ async function submit() {
             </FwbP>
             <FwbButton
               :class="selectedNovelty === data.image2_url ? buttonClicked : buttonNotClicked"
-              :disabled="pending"
               @click="setSelectedNovelty(data.image2_url)"
             >
               <svg
@@ -243,7 +241,6 @@ async function submit() {
           <div class="flex md:flex-row flex-col items-center justify-between">
             <FwbButton
               :class="selectedSurprise === data.image1_url ? buttonClicked : buttonNotClicked"
-              :disabled="pending"
               @click="setSelectedSurprise(data.image1_url)"
             >
               <svg
@@ -269,7 +266,6 @@ async function submit() {
             </FwbP>
             <FwbButton
               :class="selectedSurprise === data.image2_url ? buttonClicked : buttonNotClicked"
-              :disabled="pending"
               @click="setSelectedSurprise(data.image2_url)"
             >
               <svg
@@ -295,7 +291,6 @@ async function submit() {
           <div class="flex md:flex-row flex-col items-center justify-between">
             <FwbButton
               :class="selectedValue === data.image1_url ? buttonClicked : buttonNotClicked"
-              :disabled="pending"
               @click="setSelectedValue(data.image1_url)"
             >
               <svg
@@ -321,7 +316,6 @@ async function submit() {
             </FwbP>
             <FwbButton
               :class="selectedValue === data.image2_url ? buttonClicked : buttonNotClicked"
-              :disabled="pending"
               @click="setSelectedValue(data.image2_url)"
             >
               <svg
@@ -346,7 +340,7 @@ async function submit() {
 
           <FwbButton
             class="md:p-6 pt-3 pb-5 p-2 vertical-text text-base bg-TUdarkgreen hover:bg-TUdarkgreen hover:ring-2 hover:ring-TUlightgreen focus:ring-2 focus:ring-TUlightgreen active:ring-4 active:ring-TUlightgreen "
-            :disabled="!selectedNovelty || !selectedSurprise || !selectedValue || pending"
+            :disabled="!selectedNovelty || !selectedSurprise || !selectedValue"
             @click="submit"
           >
             {{ $t('submit') }}
