@@ -6,6 +6,8 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
 
+  compatibilityDate: '2024-07-09',
+
   modules: ['@nuxt/eslint', 'nuxt-mongoose', '@nuxtjs/tailwindcss', '@nuxtjs/i18n'],
 
   eslint: {
