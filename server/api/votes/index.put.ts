@@ -65,23 +65,29 @@ async function calculateUpdatedEloScores(voteBody: Vote, image1: Image, image2: 
   if (voteBody.winner_novelty === image1.url_id) {
     winsImage1++
     image1.score_novelty = calculateNewEloRating(image1.score_novelty, expected1_novelty, 1)
+    image2.score_novelty = calculateNewEloRating(image2.score_novelty, expected2_novelty, 0)
   }
   else {
     image2.score_novelty = calculateNewEloRating(image2.score_novelty, expected2_novelty, 1)
+    image1.score_novelty = calculateNewEloRating(image1.score_novelty, expected1_novelty, 0)
   }
   if (voteBody.winner_surprise === image1.url_id) {
     winsImage1++
     image1.score_surprise = calculateNewEloRating(image1.score_surprise, expected1_surprise, 1)
+    image2.score_surprise = calculateNewEloRating(image2.score_surprise, expected2_surprise, 0)
   }
   else {
     image2.score_surprise = calculateNewEloRating(image2.score_surprise, expected2_surprise, 1)
+    image1.score_surprise = calculateNewEloRating(image1.score_surprise, expected1_surprise, 0)
   }
   if (voteBody.winner_value === image1.url_id) {
     winsImage1++
     image1.score_value = calculateNewEloRating(image1.score_value, expected1_value, 1)
+    image2.score_value = calculateNewEloRating(image2.score_value, expected2_value, 0)
   }
   else {
     image2.score_value = calculateNewEloRating(image2.score_value, expected2_value, 1)
+    image1.score_value = calculateNewEloRating(image1.score_value, expected1_value, 0)
   }
 
   const winsImage2 = 3 - winsImage1
