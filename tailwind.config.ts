@@ -53,6 +53,7 @@ export default {
     },
   },
   plugins: [
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     require('flowbite/plugin'),
   ],
 } satisfies Config

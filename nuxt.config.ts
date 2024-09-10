@@ -24,4 +24,8 @@ export default defineNuxtConfig({
       eloKFactor: parseInt(process.env.ELO_K_FACTOR || '32', 10),
     },
   },
+
+  i18n: {
+    vueI18n: './i18n.config.ts',
+  },
 })
